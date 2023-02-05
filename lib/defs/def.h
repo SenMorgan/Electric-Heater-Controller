@@ -27,6 +27,8 @@
 
 // IO pins
 // #define LED_BUILTIN 2    // D4 - already defined in pins_arduino.h
-
+#define HEATER_ELEMENT_1 14 // D5
+#define HEATER_ELEMENT_2 12 // D6
+#define HEATER_ELEMENT_3 13 // D7
 
 #endif // _DEF_H_
