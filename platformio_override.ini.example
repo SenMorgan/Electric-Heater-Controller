@@ -1,4 +1,4 @@
-[env:nodemcuv2-OTA]
+[env:d1_mini-OTA]
 upload_flags =
     --port=***
     --auth=***
@@ -9,8 +9,8 @@ build_flags =
     '-DWIFI_PASSWD="***"'
     '-DMQTT_SERVER="***"'
     '-DMQTT_SERVER_PORT=1883'
-    '-DHOSTNAME="***"'
+    '-DHOSTNAME="electric-heater-controller"'
     '-DMQTT_LOGIN="***"'
     '-DMQTT_PASSWORD="***"'
-    '-DOTA_HOSTNAME="***"'
+    '-DOTA_HOSTNAME="Electric-Heater-Controller"'
     '-DOTA_PASSWORD="***"'
