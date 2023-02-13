@@ -25,20 +25,25 @@
 #define MQTT_STATE_PWM_1          DEFAULT_TOPIC "state/pwm/1"
 #define MQTT_STATE_PWM_2          DEFAULT_TOPIC "state/pwm/2"
 #define MQTT_STATE_PWM_3          DEFAULT_TOPIC "state/pwm/3"
+#define MQTT_STATE_PWM_ALL        DEFAULT_TOPIC "state/pwm/all"
 #define MQTT_STATE_POWER_1        DEFAULT_TOPIC "state/power/1"
 #define MQTT_STATE_POWER_2        DEFAULT_TOPIC "state/power/2"
 #define MQTT_STATE_POWER_3        DEFAULT_TOPIC "state/power/3"
+#define MQTT_STATE_POWER_ALL      DEFAULT_TOPIC "state/power/all"
+
 // Topics for subscribing
-#define MQTT_CMD_TOPIC_RESET      DEFAULT_TOPIC "set/reset"
-#define MQTT_CMD_TOPIC_PWM_1      DEFAULT_TOPIC "set/pwm/1"
-#define MQTT_CMD_TOPIC_PWM_2      DEFAULT_TOPIC "set/pwm/2"
-#define MQTT_CMD_TOPIC_PWM_3      DEFAULT_TOPIC "set/pwm/3"
-#define MQTT_CMD_TOPIC_POWER_1    DEFAULT_TOPIC "set/power/1"
-#define MQTT_CMD_TOPIC_POWER_2    DEFAULT_TOPIC "set/power/2"
-#define MQTT_CMD_TOPIC_POWER_3    DEFAULT_TOPIC "set/power/3"
-// Commands
-#define MQTT_CMD_ON               "1"
-#define MQTT_CMD_OFF              "0"
+#define MQTT_CMD_TOPIC_RESET     DEFAULT_TOPIC "set/reset"
+#define MQTT_CMD_TOPIC_PWM_1     DEFAULT_TOPIC "set/pwm/1"
+#define MQTT_CMD_TOPIC_PWM_2     DEFAULT_TOPIC "set/pwm/2"
+#define MQTT_CMD_TOPIC_PWM_3     DEFAULT_TOPIC "set/pwm/3"
+#define MQTT_CMD_TOPIC_PWM_ALL   DEFAULT_TOPIC "set/pwm/all"
+#define MQTT_CMD_TOPIC_POWER_1   DEFAULT_TOPIC "set/power/1"
+#define MQTT_CMD_TOPIC_POWER_2   DEFAULT_TOPIC "set/power/2"
+#define MQTT_CMD_TOPIC_POWER_3   DEFAULT_TOPIC "set/power/3"
+#define MQTT_CMD_TOPIC_POWER_ALL DEFAULT_TOPIC "set/power/all"
+// MQTT commands
+#define MQTT_CMD_ON              "1"
+#define MQTT_CMD_OFF             "0"
 
 // Publish interval
 #define MQTT_PUBLISH_INTERVAL 1000

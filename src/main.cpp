@@ -132,10 +132,15 @@ void publish_data(void)
         send_pwm_state(MQTT_STATE_PWM_1, heater_1.pwm);
         send_pwm_state(MQTT_STATE_PWM_2, heater_2.pwm);
         send_pwm_state(MQTT_STATE_PWM_3, heater_3.pwm);
+        // Send maximum PWM state to «MQTT_STATE_PWM_ALL» topic
+        send_pwm_state(MQTT_STATE_PWM_ALL, max(max(heater_1.pwm, heater_2.pwm), heater_3.pwm));
+
         // Send power states
         send_power_state(MQTT_STATE_POWER_1, heater_1.power_state);
         send_power_state(MQTT_STATE_POWER_2, heater_2.power_state);
         send_power_state(MQTT_STATE_POWER_3, heater_3.power_state);
+        // If at least one heater is powered, send 1 to «MQTT_STATE_POWER_ALL» topic
+        send_power_state(MQTT_STATE_POWER_ALL, (heater_1.power_state || heater_2.power_state || heater_3.power_state));
     }
 }
 
@@ -253,5 +258,35 @@ void callback(String topic, byte *payload, unsigned int length)
         set_pwm(HEATER_ELEMENT_3, heater_3.pwm);
         send_pwm_state(MQTT_STATE_PWM_3, heater_3.pwm);
         Serial.println("Set PWM duty cycle for heater element 3 to " + msgString);
+    }
+
+    // Same PWM for all heater elements
+    else if (topic == (MQTT_CMD_TOPIC_PWM_ALL))
+    {
+        int pwm = msgString.toInt();
+        set_pwm(HEATER_ELEMENT_1, heater_1.pwm = pwm);
+        set_pwm(HEATER_ELEMENT_2, heater_2.pwm = pwm);
+        set_pwm(HEATER_ELEMENT_3, heater_3.pwm = pwm);
+        send_pwm_state(MQTT_STATE_PWM_ALL, pwm);
+        Serial.println("Set PWM duty cycle for all heater elements to " + msgString);
+    }
+    // Same power state for all heater elements
+    else if (topic == (MQTT_CMD_TOPIC_POWER_ALL))
+    {
+        if (msgString == MQTT_CMD_ON)
+        {
+            set_pwm(HEATER_ELEMENT_1, heater_1.power_state = HIGH);
+            set_pwm(HEATER_ELEMENT_2, heater_2.power_state = HIGH);
+            set_pwm(HEATER_ELEMENT_3, heater_3.power_state = HIGH);
+            send_power_state(MQTT_STATE_POWER_ALL, HIGH);
+        }
+        else if (msgString == MQTT_CMD_OFF)
+        {
+            set_pwm(HEATER_ELEMENT_1, heater_1.power_state = LOW);
+            set_pwm(HEATER_ELEMENT_2, heater_2.power_state = LOW);
+            set_pwm(HEATER_ELEMENT_3, heater_3.power_state = LOW);
+            send_power_state(MQTT_STATE_POWER_ALL, LOW);
+        }
+        Serial.println("Set power for all heater elements to " + msgString);
     }
 }
